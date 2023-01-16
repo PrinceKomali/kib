@@ -10,14 +10,14 @@ cd kib
 make
 ```
 ## Current features
-`0 - 9`: Push number 
-`p`: Pop stack and print without newline 
-`P`: Pop stack and print with newline 
-`+`: Pop stack twice and add/concatenate  
-`'`: Push string 
-`<`: Push compressed integer 
-`backtick`: Push compressed string 
-`c`: Pop stack and index into constants list 
+`0 - 9`: Push number  
+`p`: Pop stack and print without newline  
+`P`: Pop stack and print with newline  
+`+`: Pop stack twice and add/concatenate   
+`'`: Push string  
+`<`: Push compressed integer  
+`backtick`: Push compressed string  
+`c`: Pop stack and index into constants list  
 
 ## Examples
 ```

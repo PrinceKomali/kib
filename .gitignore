@@ -1,1 +1,2 @@
-./kib # symlink for testinggit 
+./kib # symlink for testing
+./build/* # build files

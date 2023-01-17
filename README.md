@@ -15,9 +15,9 @@ make
 `P`: Pop stack and print with newline  
 `+`: Pop stack twice and add/concatenate  
 `+`: Pop stack twice and subtract/remove  
-`` ` ``: Push string  
+`'`: Push string  
 `<`: Push compressed integer  
-`backtick`: Push compressed string  
+`` ` ``: Push compressed string  
 `c`: Pop stack and index into constants list  
 `b`: Pop stack, index into builtins library and execute  
 

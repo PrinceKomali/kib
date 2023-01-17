@@ -1,5 +1,5 @@
 # Kib
-**K**omali **i**s **b**ored
+**K**omali **i**s **b**ored  
 An interpreted golfing language written in D
 
 ## Building
@@ -13,11 +13,13 @@ make
 `0 - 9`: Push number  
 `p`: Pop stack and print without newline  
 `P`: Pop stack and print with newline  
-`+`: Pop stack twice and add/concatenate   
-`'`: Push string  
+`+`: Pop stack twice and add/concatenate  
+`+`: Pop stack twice and subtract/remove  
+`` ` ``: Push string  
 `<`: Push compressed integer  
 `backtick`: Push compressed string  
 `c`: Pop stack and index into constants list  
+`b`: Pop stack, index into builtins library and execute  
 
 ## Examples
 ```

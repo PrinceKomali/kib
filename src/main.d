@@ -35,8 +35,7 @@ void main(string[] args) {
         interpret(args[2]);
     }
     else if(args[1] == "test") {
-        writeln(input());
-
+        writeln("No tests at the moment...");
     }
     else {
         other_error("Unknown argument: \x1b[1;31m" ~ args[1] ~ "\x1b[0m");

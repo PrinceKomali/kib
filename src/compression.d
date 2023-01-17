@@ -59,7 +59,10 @@ t mb_decompress_int(int s) { return mb_decompress_int(to!string(s));}
 t compress_string(t s) {
     string str = s.sval;
     string[] nums = [];
-    foreach(string c; str.split("")) nums ~= mb_compress_int(to!string(indexOf(matchbase, c))).sval;
+    foreach(string c; str.split("")) {
+        if(indexOf(matchbase, c) == -1) return parse_t("\0");
+        nums ~= mb_compress_int(to!string(indexOf(matchbase, c))).sval;
+    }
     string[] arr = [];
     while(nums.length > 0) {
         string current = nums[0];

@@ -8,25 +8,13 @@ import std.conv;
 
 import kib.compression;
 import kib.constants;
+import kib.library;
+import kib.math;
 
 import kib.types;
 import kib.helpers;
 import kib.error;
 
-t add(t a, t b) {
-    if(isNaN(a.nval) || isNaN(b.nval)) {
-        return parse_t(a.sval ~ b.sval);
-    }
-    return parse_t(to!string(a.nval + b.nval));
-}
-t[] add_stack(t[] s) {
-    t b = s[$-1];
-    s.popBack();
-    t a = s[$-1];
-    s.popBack();
-    s ~= add(a,b);
-    return s;
-}
 
 int interpret(string code) {
     bool printed = false;
@@ -42,7 +30,6 @@ int interpret(string code) {
         if(is_num(b)) {
             
             while(chars.length > 0 && is_num(chars[0])) {
-                
                 b = b ~ chars[0];
                 chars.popFront();
                 i++;
@@ -101,10 +88,12 @@ int interpret(string code) {
             writeln(stack[$ - 1].sval);
             stack.popBack();
         }
-        if(b == "+") {
-            if(stack.length < 2) stack ~= input();
-            if(stack.length < 2) stack ~= input();
-            stack = add_stack(stack);
+        if(b == "+") stack = add_stack(stack);
+        if(b == "-") stack = subtract_stack(stack);
+        if(b == "*") {
+            t[] output = multiply_stack(stack);
+            if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
+            stack = output;
         }
         if(b == "c") {
             if(stack.length < 1) stack ~= input();
@@ -112,6 +101,13 @@ int interpret(string code) {
             if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
             else stack = output;
         }
+        if(b == "b") {
+            if(stack.length < 1) stack ~= input();
+            t[] output = get_builtin(stack);
+            if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
+            else stack = output;
+        }
+
     }
     if(!printed && stack.length > 0) writeln(stack[$ - 1].sval);
     return 0;

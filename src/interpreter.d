@@ -50,6 +50,12 @@ int interpret(string code) {
             stack ~= parse_t(b);
             continue;
         }
+        if(b == "\\") {
+            b = chars[0];
+            chars.popFront();
+            i++;
+            stack ~= parse_t(b);
+        }
         if(b == "<") {
             if(!canFind(chars, "<")) kib_error(code, i, "Unmatched <");
             b = "";

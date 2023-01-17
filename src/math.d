@@ -45,7 +45,7 @@ t[] subtract_stack(t[] s) {
 }
 t multiply(t a, t b) {
     if(isNaN(a.nval)) {
-        return parse_t(replicate(s.sval, b.nval));
+        return parse_t(replicate(a.sval, to!int(b.nval)));
     }
     return parse_t(to!string(a.nval * b.nval));
 }

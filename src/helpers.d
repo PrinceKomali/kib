@@ -23,7 +23,18 @@ t parse_t(string c) {
     if(is_num(c)) v.nval = to!double(c); 
     return v;
 }
-t parse_t(int c) { return parse_t(to!string(c)); }
+t parse_t(double c) {
+    t v;
+    v.sval = to!string(c);
+    v.nval = c; 
+    return v;
+}
+t parse_t(int c) {
+    t v;
+    v.sval = to!string(c);
+    v.nval = to!double(c); 
+    return v;
+}
 
 t input() {
     string[] a = readln().split("");

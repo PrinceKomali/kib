@@ -41,11 +41,11 @@ t compress_int(int num, string codebase = codepage) { return compress_int(parse_
 t decompress_int(t num, string codebase = codepage) {
     string[] cp = codebase.split("");
     string[] s = num.sval.split("").reverse();
-    int total = 0;
+    double total = 0;
     for(int i = 0; i < s.length;i++) {
         total += pow(cp.length, i) * indexOf(codebase, s[i]);
     }
-    return parse_t(to!string(total));
+    return parse_t(total);
 }
 t decompress_int(string num, string codebase = codepage) { return decompress_int(parse_t(num), codebase); }
 

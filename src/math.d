@@ -15,7 +15,7 @@ t add(t a, t b) {
     if(isNaN(a.nval) || isNaN(b.nval)) {
         return parse_t(a.sval ~ b.sval);
     }
-    return parse_t(to!string(a.nval + b.nval));
+    return parse_t(a.nval + b.nval);
 }
 t[] add_stack(t[] s) {
     if(s.length < 2) s ~= input();
@@ -31,7 +31,7 @@ t subtract(t a, t b) {
     if(isNaN(a.nval) || isNaN(b.nval)) {
         return parse_t(a.sval.replace(b.sval, ""));
     }
-    return parse_t(to!string(a.nval - b.nval));
+    return parse_t(a.nval - b.nval);
 }
 t[] subtract_stack(t[] s) {
     if(s.length < 2) s ~= input();
@@ -47,7 +47,7 @@ t multiply(t a, t b) {
     if(isNaN(a.nval)) {
         return parse_t(replicate(a.sval, to!int(b.nval)));
     }
-    return parse_t(to!string(a.nval * b.nval));
+    return parse_t(a.nval * b.nval);
 }
 t[] multiply_stack(t[] s) {
     if(s.length < 2) s ~= input();
@@ -78,4 +78,35 @@ t[] divide_stack(t[] s) {
     // s.popBack();
     // s ~= divide(a,b);
     // return s;
+}
+t exponent(t a, t b) {
+    return parse_t(a.nval ^^ b.nval);
+}
+t[] exponent_stack(t[] s) {
+    if(s.length < 2) s ~= input();
+    if(s.length < 2) s ~= input();
+    t b = s[$-1];
+    if(isNaN(b.nval)) return [gen_error("Exponent arguments must be numbers")];
+    s.popBack();
+    t a = s[$-1];
+    if(isNaN(b.nval)) return [gen_error("Exponent arguments must be numbers")];
+    s.popBack();
+    s ~= exponent(a,b);
+    return s;
+}
+t[] square_stack(t[] s) {
+    if(s.length < 1) s ~= input();
+    t b = s[$-1];
+    if(isNaN(b.nval)) return [gen_error("Exponent arguments must be numbers")];
+    s.popBack();
+    s ~= exponent(b,parse_t(2.0));
+    return s;
+}
+t[] cube_stack(t[] s) {
+    if(s.length < 1) s ~= input();
+    t b = s[$-1];
+    if(isNaN(b.nval)) return [gen_error("Exponent arguments must be numbers")];
+    s.popBack();
+    s ~= exponent(b,parse_t(3.0));
+    return s;
 }

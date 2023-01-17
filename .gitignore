@@ -1,2 +1,1 @@
-./kib # symlink for testing
-build/ # build files
+build/

@@ -4,6 +4,9 @@ import std.stdio;
 import std.file;
 import std.conv;
 import std.array;
+import std.math;
+import std.format;
+import std.algorithm;
 
 import kib.interpreter;
 import kib.helpers;
@@ -35,7 +38,8 @@ void main(string[] args) {
         interpret(args[2]);
     }
     else if(args[1] == "test") {
-        writeln("No tests at the moment...");
+        // writeln("No tests at the moment...");
+        double a = 11_972_312.0 ^^ 2.0;
     }
     else {
         other_error("Unknown argument: \x1b[1;31m" ~ args[1] ~ "\x1b[0m");

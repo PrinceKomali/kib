@@ -14,7 +14,7 @@ make
 `p`: Pop stack and print without newline  
 `P`: Pop stack and print with newline  
 `+`: Pop stack twice and add/concatenate  
-`+`: Pop stack twice and subtract/remove  
+`-`: Pop stack twice and subtract/remove  
 `'`: Push string  
 `<`: Push compressed integer  
 `` ` ``: Push compressed string  

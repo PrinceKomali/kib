@@ -16,7 +16,7 @@ make
 `+`: Pop stack twice and add/concatenate   
 `'`: Push string  
 `<`: Push compressed integer  
-`backtick`: Push compressed string  
+`` ` ``: Push compressed string  
 `c`: Pop stack and index into constants list  
 
 ## Examples

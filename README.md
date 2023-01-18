@@ -14,8 +14,13 @@ make
 `p`: Pop stack and print without newline  
 `P`: Pop stack and print with newline  
 `+`: Pop stack twice and add/concatenate  
-`-`: Pop stack twice and subtract/remove  
+`-`: Pop stack twice and subtract/remove
+`*`: Pop stack twice and multiply/replicate  
+`^`: Pop stack twice and exponentiate  
+`i`: Increment
+`s`: Square
 `'`: Push string  
+`\`: Push single character string  
 `<`: Push compressed integer  
 `` ` ``: Push compressed string  
 `c`: Pop stack and index into constants list  

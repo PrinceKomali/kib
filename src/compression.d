@@ -6,6 +6,8 @@ import std.algorithm;
 import std.stdio;
 import std.string;
 import std.math;
+import std.format;
+import std.bigint;
 
 import kib.types;
 import kib.helpers;
@@ -14,24 +16,15 @@ import kib.error;
 string matchbase = "\0 etaoinsrhdlucmfywgpbvkxqjz";
 string codepage = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~\n";
 t compress_int(t num, string codebase = codepage) {
-    string[] cp = codebase.split("");
-    int[] p = [0];
-    for(int i = 0; i < num.nval; i++) {
-        p[0]++;
-        while(canFind(p, cp.length)) {
-            for(int j = 0; j < p.length; j++) {
-                if(p[j] == cp.length) {
-                    if(p.length < j) p ~= 0;
-                    else p[j] = 0;
-                    if(p.length > j + 1) p[j + 1]++;
-                    else p ~= 1;
-                }
-            }
-        }
+    int[] digits = [];
+    double n = num.nval;
+    while(n > 0) {
+        digits ~= to!int(n % codepage.length);
+        n = floor(n / codepage.length);
     }
     string output = "";
-    foreach(int i; p.reverse()) {
-        output ~= cp[i];
+    foreach(int i; digits.reverse()) {
+        output ~= codepage[i];
     }
     return parse_t(output);
 }
@@ -40,12 +33,13 @@ t compress_int(int num, string codebase = codepage) { return compress_int(parse_
 
 t decompress_int(t num, string codebase = codepage) {
     string[] cp = codebase.split("");
-    string[] s = num.sval.split("").reverse();
-    double total = 0;
+    string[] s = num.sval.split("");
+    BigInt total = "0";
     for(int i = 0; i < s.length;i++) {
-        total += pow(cp.length, i) * indexOf(codebase, s[i]);
+        total = total * BigInt(cp.length) + indexOf(codebase, s[to!ulong(i)]);
     }
-    return parse_t(total);
+    // Eventually add BigInt support for t
+    return parse_t(format("%d", total));
 }
 t decompress_int(string num, string codebase = codepage) { return decompress_int(parse_t(num), codebase); }
 

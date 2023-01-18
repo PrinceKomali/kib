@@ -38,8 +38,11 @@ void main(string[] args) {
         interpret(args[2]);
     }
     else if(args[1] == "test") {
-        // writeln("No tests at the moment...");
-        double a = 11_972_312.0 ^^ 2.0;
+        // core.int128.Cent a;
+        //  a = 201120201021102010201221;
+        // writeln(ulong.max);
+        writeln("No tests at the moment...");
+        
     }
     else {
         other_error("Unknown argument: \x1b[1;31m" ~ args[1] ~ "\x1b[0m");

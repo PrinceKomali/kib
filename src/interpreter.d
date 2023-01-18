@@ -35,7 +35,7 @@ int interpret(string code) {
         string b = chars[0];
         chars.popFront();
         i++;
-
+        // TODO: sort alphabetically
         if(is_num(b)) {
             
             while(chars.length > 0 && is_num(chars[0])) {
@@ -64,6 +64,7 @@ int interpret(string code) {
             chars.popFront();
             i++;
             stack ~= parse_t(b);
+            continue;
         }
         if(b == "<") {
             if(!canFind(chars, "<")) kib_error(code, i, "Unmatched <");
@@ -101,6 +102,7 @@ int interpret(string code) {
             t[] output = multiply_stack(stack);
             if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
             stack = output;
+            continue;
         }
         if(b == "^") stack = exponent_stack(stack);
         if(b == "s") stack = square_stack(stack);
@@ -109,16 +111,32 @@ int interpret(string code) {
             t[] output = get_constant(stack);
             if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
             else stack = output;
+            continue;
         }
         if(b == "b") {
             if(stack.length < 1) stack ~= input();
             t[] output = get_builtin(stack);
             if(output.length == 1 && output[0].errval) kib_error(code, i, output[0].errval);
             else stack = output;
+            continue;
         }
         if(b == "i") {
             stack ~= parse_t(1);
             stack = add_stack(stack);
+            continue;
+        }
+        if(b == "R") {
+            if(stack.length < 3) stack ~= input();
+            if(stack.length < 3) stack ~= input();
+            if(stack.length < 3) stack ~= input();
+            t r = stack[$ - 1];
+            stack.popFront();
+            t a = stack[$ - 1];
+            stack.popFront();
+            t s = stack[$ - 1];
+            stack.popFront();
+            stack ~= parse_t(s.sval.replace(a.sval, r.sval));
+             continue;
         }
 
     }

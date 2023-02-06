@@ -5,6 +5,7 @@ import std.range;
 import std.algorithm;
 import std.math;
 import std.conv;
+import std.ascii;
 
 import kib.types;
 import kib.helpers;
@@ -24,7 +25,9 @@ t[] get_builtin(t[] s) {
 t[] function(t[])[] library = [
     &fibonacci,
     &compress_int_fn,
-    &compress_string_fn
+    &compress_string_fn,
+    &initial_cap,
+    &is_truthy_string
     
 ];
 
@@ -58,5 +61,24 @@ t[] compress_string_fn(t[] stack) {
     t str = compress_string(s);
     if(str.sval == "\0") return [gen_error("Invalid character; all characters must be in base 27 (a-z and space)")];
     else stack ~= str;
+    return stack;
+}
+t[] initial_cap(t[] stack) {
+    if(stack.length < 1) stack ~= input();
+    t s = stack[$ - 1];
+    stack.popBack();
+    string[] words = s.sval.split(" ");
+    for(int i = 0; i < words.length; i++) {
+        string w = to!string(toUpper(words[i][0])); 
+        words[i] = w ~ words[i][1..$];
+    }
+    stack ~= parse_t(words.join(" "));
+    return stack;
+}
+t[] is_truthy_string(t[] stack) {
+    if(stack.length < 1) stack ~= input();
+    t s = stack[$ - 1];
+    stack.popBack();
+    stack ~= is_truthy(s) ? parse_t(1) : parse_t(0);
     return stack;
 }

@@ -19,5 +19,10 @@ t[] get_constant(t[] s) {
     return s;
 }
 t[] constants = [
-    parse_t("Hello, World!")
+    parse_t("Hello, World!"),
+    parse_t("Hello World"),
+    parse_t("abdefghijklmnopqrstuvwxyz"),
+    parse_t("ABDEFGHIJKLMNOPQRSTUVWXYZ"),
+    parse_t(" `!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~\n"),
+    
 ];

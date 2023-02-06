@@ -23,3 +23,39 @@ t input() {
     a.popBack();
     return parse_t(join(a));
 }
+
+t[] str_to_tarr(string s) {
+    if(s.length < 2) return []; // temp fix; TODO: resolve this
+    t[] v;
+    foreach(string c; s.split("")) {
+        v ~= parse_t(c);
+    }
+    return v;
+}
+
+string print_array(t[] stack, bool color) {
+    string o = "";
+    o ~= "{ ";
+    foreach(t v; stack) {
+        if(!isNaN(v.nval)) {
+            o ~= ((color ? "\x1b[33m" : "") ~ to!string(v.nval) ~ (color ? "\x1b[0m" : "") ~ " ");
+            continue;
+        }
+        if(v.aval.length > 0) {
+            o ~= (print_array(v.aval, color) ~ " ");
+            continue;
+        }
+        else {
+            o ~= ((color ? "\x1b[32m" : "") ~ "'" ~ v.sval ~ "'" ~ (color ? "\x1b[0m" : "") ~ " ");
+            
+        }
+    }
+
+    o ~= "}";
+    return o;
+}
+bool is_truthy(t s) {
+    if(!isNaN(s.nval)) return to!bool(s.nval);
+    if(s.aval) return s.aval.length > 0;
+    else return s.sval.length > 0;
+}

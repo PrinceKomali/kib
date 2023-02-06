@@ -19,12 +19,12 @@ t compress_int(t num, string codebase = codepage) {
     int[] digits = [];
     double n = num.nval;
     while(n > 0) {
-        digits ~= to!int(n % codepage.length);
-        n = floor(n / codepage.length);
+        digits ~= to!int(n % codebase.length);
+        n = floor(n / codebase.length);
     }
     string output = "";
     foreach(int i; digits.reverse()) {
-        output ~= codepage[i];
+        output ~= codebase[i];
     }
     return parse_t(output);
 }
@@ -61,6 +61,7 @@ t compress_string(t s) {
     while(nums.length > 0) {
         string current = nums[0];
         nums.popFront();
+        
         if(nums.length > 1 && mb_decompress_int(current ~ nums[0]).nval < codepage.length) {
             current ~= nums[0];
             nums.popFront();
@@ -68,8 +69,11 @@ t compress_string(t s) {
         arr ~= current;
 
     }
+    
     string output = "";
-    foreach(string c; arr) output ~= codepage[to!ulong(mb_decompress_int(c).nval)];
+    foreach(string c; arr) {
+        output ~= codepage[to!ulong(mb_decompress_int(c).nval)];
+    }
     return parse_t(output);
     
 }

@@ -10,11 +10,11 @@ make
 ```
 The compiler used by make is [gdc](https://gdcproject.org/). DMD also works but isn't exactly a drop-in replacement because of compiler flags. If you want to use DMD (e.g. you use windows) you can compile `src/*` instead.
 ## Current features
-`!`: Logical NOT
-`&`: Logical AND
-`|`: Logical OR
-`{`: Loop
-`}`: If truthy (Pops stack)
+`!`: Logical NOT  
+`&`: Logical AND  
+`|`: Logical OR  
+`{`: Loop  
+`}`: If truthy (Pops stack)  
 `0 - 9`: Push number  
 `` ` ``: Push compressed string  
 `'`: Push string  

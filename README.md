@@ -49,5 +49,5 @@ Prints "the quick brown fox jumps over the lazy dog"
 ```
 0{idd0bP9 5b}x}{
 ```
-Prints the first 10 Fibonacci nnumbers
+Prints the first 10 Fibonacci numbers
 (TODO: add more examples) 

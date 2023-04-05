@@ -1,4 +1,4 @@
-module kib.main;
+module main;
 
 import std.stdio;
 import std.file;
@@ -8,11 +8,11 @@ import std.math;
 import std.format;
 import std.algorithm;
 
-import kib.interpreter;
-import kib.helpers;
-import kib.types;
-import kib.compression;
-import kib.error;
+import interpreter;
+import helpers;
+import types;
+import compression;
+import error;
 
 string code = ">*e,%N%),+>";
 
@@ -21,7 +21,11 @@ void help_menu() {
         "\x1b[1mkib\x1b[0m v0.0\n" ~
         "    help               Shows this message\n" ~
         "    run                Run a file\n" ~
-        "    eval               Evaluate the next argument"
+        "    eval               Evaluate the next argument\n\n" ~
+        
+        "\x1b[1mOptions:\x1b[0m\n" ~
+        "    -n  --no-implicit-print    Do not implicitly print top of stack\n" ~
+        "    -s  --print-stack          Print the final stack after execution"
     );   
 }
 bool color = true; 
@@ -44,13 +48,20 @@ void main(string[] args_raw) {
     }
 
     bool print_stack = false;
+    bool imp_print = true;
     foreach(string c; flags) {
         switch(c) {
             case "s":
                 print_stack = true;
                 break;
-            case "print_stack":
+            case "print-stack":
                 print_stack = true;
+                break;
+            case "n": 
+                imp_print = false;
+                break;
+            case "no-implicit-print":
+                imp_print = false;
                 break;
             default: 
                 other_error("Unknown flag " ~ c);
@@ -61,14 +72,16 @@ void main(string[] args_raw) {
         help_menu();
         return;
     }
-    else if(args[1] == "run") {
+
+    t[] stack = [];
+    if(args[1] == "run") {
         if(args.length < 3) other_error("Need a 3rd argument");
         if(!exists(args[2])) other_error("File not found: \x1b[1;31m" ~ args[2] ~ "\x1b[0m");
-        interpret(to!string(read(args[2])), print_stack, color);
+        interpret(stack, to!string(read(args[2])), print_stack, color, false, imp_print);
     }
     else if(args[1] == "eval") {
         if(args.length < 3) other_error("Need a 3rd argument");
-        interpret(args[2], print_stack, color);
+        interpret(stack, args[2], print_stack, color, false, imp_print);
     }
     else if(args[1] == "test") {
         writeln("No tests at the moment...");

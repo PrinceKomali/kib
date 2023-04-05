@@ -1,13 +1,13 @@
-module kib.constants;
+module constants;
 
 import std.array;
 import std.stdio; 
 import std.math;
 import std.conv; 
 
-import kib.types;
-import kib.error;
-import kib.helpers;
+import types;
+import error;
+import helpers;
 
 t[] get_constant(t[] s) {
     t n = s[$ - 1];

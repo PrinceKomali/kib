@@ -1,4 +1,4 @@
-module kib.math;
+module math;
 
 import std.math;
 import std.algorithm;
@@ -7,9 +7,9 @@ import std.array;
 import std.string;
 import std.conv;
 
-import kib.types;
-import kib.error;
-import kib.helpers;
+import types;
+import error;
+import helpers;
 
 t add(t a, t b) {
     if(isNaN(a.nval) || isNaN(b.nval)) {

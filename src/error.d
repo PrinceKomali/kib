@@ -1,10 +1,10 @@
-module kib.error;
+module error;
  
 import std.stdio;
 import std.range; 
 import core.stdc.stdlib : exit;
 
-import kib.types;
+import types;
 
 void kib_error(string code, int i, string message) {
     writeln("\x1b[1mkib: \x1b[31mError\x1b[0m at position ", i, ": ", message);

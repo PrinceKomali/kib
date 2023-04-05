@@ -1,4 +1,4 @@
-module kib.helpers;
+module helpers;
 
 import std.array;
 import std.conv;
@@ -7,8 +7,8 @@ import std.stdio;
 import std.string;
 import std.math;
 
-import kib.types;
-import kib.error;
+import types;
+import error;
 
 bool is_num(string c) {
     if(c == "") return false;
@@ -59,3 +59,8 @@ bool is_truthy(t s) {
     if(s.aval) return s.aval.length > 0;
     else return s.sval.length > 0;
 }
+bool booleanize(t v) {
+    return !isNaN(v.nval) ? !!v.nval :
+        v.aval ?  v.aval.length > 0 :
+        v.sval ? v.sval.length == 0 : false;
+    }

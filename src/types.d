@@ -1,10 +1,10 @@
-module kib.types;
+module types;
 
 import std.conv;
 import std.array;
 import std.algorithm;
 
-import kib.helpers; 
+import helpers; 
 
 struct t {
     double nval;

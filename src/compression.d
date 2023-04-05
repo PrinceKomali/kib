@@ -1,4 +1,4 @@
-module kib.compression;
+module compression;
 
 import std.array;
 import std.conv;
@@ -9,9 +9,9 @@ import std.math;
 import std.format;
 import std.bigint;
 
-import kib.types;
-import kib.helpers;
-import kib.error;
+import types;
+import helpers;
+import error;
 
 string matchbase = "\0 etaoinsrhdlucmfywgpbvkxqjz";
 string codepage = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~\n";
